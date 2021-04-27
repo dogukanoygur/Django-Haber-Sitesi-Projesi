@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container mt-3 mb-5">
+	<h3 class="border-bottom pb-1 my-4">Tüm Haberler</h3>
+    <!-- Haber Kutusu -->
+    {% for news in all_news %}
+	<div class="card mb-4 shadow">
+	<div class="row no-gutters" onclick="location.href='/detail/{{news.id}}'">
+	    <div class="col-md-3">
+        <a href="/detail/{{news.id}}"><img src="/media/{{news.image}}" class="card-img-top-all" alt="{{news.title}}"></a>
+	    </div>
+	    <div class="col-md-8">
+	      <div class="card-body-y">
+	        <h4 class="card-title">{{news.title}}</h4>
+	        <p class="card-text">{{news.detail|safe}}</p>
+	      </div>
+	    </div>
+	  </div>
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}

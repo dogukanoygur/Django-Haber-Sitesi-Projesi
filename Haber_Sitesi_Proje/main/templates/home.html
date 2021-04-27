@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container mt-3 mb-5">
+	<!-- Öne Çıkan Haberler -->
+	<div class="row my-3">
+		<!-- Sol Taraf -->
+		<div class="col-md-7">
+			<div class="card mb-3">
+			  <a href="/detail/{{first_news.id}}"><img src="media/{{first_news.image}}" class="card-img-top" alt="{{first_news.title}}"></a>
+			  <div class="card-body">
+			    <a href="/detail/{{first_news.id}}"style="text-decoration: none"><h5 class="card-title">{{first_news.title}}</h5></a>
+      			  <p class="card-text"><small class="text-muted">{{news.add_time}}</small></p>
+		      </div>
+			</div>
+		</div>
+		<!-- Sağ taraf -->
+		
+		<div class="col-md-5" style="max-height: 450px; overflow: auto;">
+			<h5 class="border-bottom pb-1" style="height:auto">Öne Çıkan Haberler</h5>
+			{% for news in three_news %}
+			<!-- Haber Kutusu -->
+			<div class="card-body">
+			  <div class="row no-gutters">
+			    <div class="col-md-4">
+				<a href="/detail/{{news.id}}"style="text-decoration: none" ><img src="media/{{news.image}}" class="card-img-top" alt="{{news.title}}"></a>
+			    </div>
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <a href="/detail/{{news.id}}"style="text-decoration: none" ><h6 class="card-title">{{news.title}}</h6></a>
+			        <div class="card-footer">
+      					<small class="text-muted">{{news.add_time}}</small>
+    				</div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% for category in three_categories %}
+	<a href="/category/{{category.id}}"style="text-decoration: none"><h3 class="border-bottom pb-1">{{category.title}}</h3></a>
+	<div class="row my-4">
+		{% for news in category.news_set.all %}
+		  {% if forloop.counter < 5%}
+			<!-- Haber Kutusu -->
+			<div class="col-md-3">
+				<div class="card mb-3 shadow ">
+				<a href="/detail/{{news.id}}"style="text-decoration: none"><img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}"></a>
+				<div class="card-body-t">
+					<a href="/detail/{{news.id}}"style="text-decoration: none"><h6 class="card-title">{{news.title}}</h6></a>
+					<div class="card-footer">
+      					<small class="text-muted" style="font-size:14px;">{{news.add_time}}</small>
+    				</div>
+				</div>
+				</div>
+			</div>
+		  {% endif %}
+		{% endfor %}
+	</div>
+	{% endfor %}
+	<!--Kategori Sonu-->
+</main>
+{% endblock %}
